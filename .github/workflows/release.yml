@@ -51,50 +51,32 @@ jobs:
         # 获取上一个标签
         PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
         
-        # 生成变更日志
-        if [ -z "$PREV_TAG" ]; then
-          BODY=$(cat << 'ENDOFBODY'
-## 🎉 首次发布
-
-这是 React Docs UI Skills 的第一个正式版本！
-
-## 📦 包含的 Skills
-
-- **react-docs-ui-config** - 配置编写技能
-- **react-docs-ui-doc-authoring** - 文档编写技能
-- **react-docs-ui-scaffold** - 脚手架使用技能
-
-## 🚀 快速开始
-
-\`\`\`bash
-git clone https://github.com/shenjianZ/react-docs-skills.git
-cd react-docs-skills
-\`\`\`
-
-## 📖 文档
-
-- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)
-- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)
-- [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)
-ENDOFBODY
-)
-        else
-          BODY=$(cat << 'ENDOFBODY'
-## 📝 变更内容
-
-\`\`\`bash
-git log ${PREV_TAG}..${{ steps.get_version.outputs.version }} --pretty=format:"- %s" --no-merges
-\`\`\`
-
-## 🔗 完整变更日志
-
-查看完整提交记录：[${PREV_TAG}...${{ steps.get_version.outputs.version }}](https://github.com/shenjianZ/react-docs-skills/compare/${PREV_TAG}...${{ steps.get_version.outputs.version }})
-ENDOFBODY
-)
-        fi
+        # 创建临时文件
+        echo '## 🎉 首次发布' > /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '这是 React Docs UI Skills 的第一个正式版本！' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '## 📦 包含的 Skills' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '- **react-docs-ui-config** - 配置编写技能' >> /tmp/changelog.txt
+        echo '- **react-docs-ui-doc-authoring** - 文档编写技能' >> /tmp/changelog.txt
+        echo '- **react-docs-ui-scaffold** - 脚手架使用技能' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '## 🚀 快速开始' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '```bash' >> /tmp/changelog.txt
+        echo 'git clone https://github.com/shenjianZ/react-docs-skills.git' >> /tmp/changelog.txt
+        echo 'cd react-docs-skills' >> /tmp/changelog.txt
+        echo '```' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '## 📖 文档' >> /tmp/changelog.txt
+        echo '' >> /tmp/changelog.txt
+        echo '- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)' >> /tmp/changelog.txt
+        echo '- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)' >> /tmp/changelog.txt
+        echo '- [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)' >> /tmp/changelog.txt
         
-        # 将多行内容转换为单行并输出
-        BODY=$(echo "$BODY" | awk '{printf "%s\\n", $0}' | sed 's/\\n$//')
+        # 读取文件内容并处理换行
+        BODY=$(cat /tmp/changelog.txt | awk '{printf "%s\n", $0}' | sed 's/\\n$//')
         echo "body=${BODY}" >> $GITHUB_OUTPUT
 
     - name: Create Release
