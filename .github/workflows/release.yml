@@ -1,86 +1,87 @@
 name: Create Release
 
 on:
-  push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Tag version (e.g., v1.0.0)'
-        required: true
-        type: string
+    push:
+        tags:
+            - "v*"
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: "Tag version (e.g., v1.0.0)"
+                required: true
+                type: string
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
+    release:
+        runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
+        permissions:
+            contents: write
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-    - name: Validate skills
-      run: npm run validate
+            - name: Validate skills
+              run: npm run validate
 
-    - name: Get version from tag
-      id: get_version
-      run: |
-        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-          echo "version=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
-        else
-          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-        fi
+            - name: Get version from tag
+              id: get_version
+              shell: bash
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    echo "version=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "version=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+                  fi
 
-    - name: Generate changelog
-      id: changelog
-      run: |
-        # 创建变更日志文件
-        cat > /tmp/changelog.md << 'EOF'
-## 🎉 首次发布
+            - name: Generate changelog
+              id: changelog
+              shell: bash
+              run: |
+                  cat > /tmp/changelog.md <<'EOF'
+                  ## 🎉 首次发布
 
-这是 React Docs UI Skills 的第一个正式版本！
+                  这是 React Docs UI Skills 的第一个正式版本！
 
-## 📦 包含的 Skills
+                  ## 📦 包含的 Skills
 
-- **react-docs-ui-config** - 配置编写技能
-- **react-docs-ui-doc-authoring** - 文档编写技能
-- **react-docs-ui-scaffold** - 脚手架使用技能
+                  - **react-docs-ui-config** - 配置编写技能
+                  - **react-docs-ui-doc-authoring** - 文档编写技能
+                  - **react-docs-ui-scaffold** - 脚手架使用技能
 
-## 🚀 快速开始
+                  ## 🚀 快速开始
 
-\`\`\`bash
-git clone https://github.com/shenjianZ/react-docs-skills.git
-cd react-docs-skills
-\`\`\`
+                  ```bash
+                  git clone https://github.com/shenjianZ/react-docs-skills.git
+                  cd react-docs-skills
+                  ```
 
-## 📖 文档
+                  ## 📖 文档
 
-- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)
-- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)
-- [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)
-EOF
+                  - [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)
+                  - [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)
+                  - [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)
+                  EOF
 
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ steps.get_version.outputs.version }}
-        name: Release ${{ steps.get_version.outputs.version }}
-        body_path: /tmp/changelog.md
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: ${{ steps.get_version.outputs.version }}
+                  name: Release ${{ steps.get_version.outputs.version }}
+                  body_path: /tmp/changelog.md
+                  draft: false
+                  prerelease: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
