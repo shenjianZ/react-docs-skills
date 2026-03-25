@@ -1,0 +1,7 @@
+interface:
+  display_name: "React Docs UI Doc Authoring"
+  short_description: "Write Markdown, frontmatter, and MDX docs for React Docs UI."
+  default_prompt: "Use $react-docs-ui-doc-authoring to draft or review Markdown and MDX content for a React Docs UI site."
+
+policy:
+  allow_implicit_invocation: true

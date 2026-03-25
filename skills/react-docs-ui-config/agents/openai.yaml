@@ -1,0 +1,7 @@
+interface:
+  display_name: "React Docs UI Config"
+  short_description: "Write valid site.yaml and site.en.yaml for React Docs UI."
+  default_prompt: "Use $react-docs-ui-config to explain or draft React Docs UI site configuration with valid current fields."
+
+policy:
+  allow_implicit_invocation: true

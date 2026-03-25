@@ -1,0 +1,7 @@
+interface:
+  display_name: "React Docs UI Scaffold"
+  short_description: "Create and bootstrap docs sites with create-react-docs-ui."
+  default_prompt: "Use $react-docs-ui-scaffold to explain how to create, start, and understand a new React Docs UI project."
+
+policy:
+  allow_implicit_invocation: true
