@@ -45,8 +45,11 @@ cd react-docs-skills
 将技能目录添加到您的 AI Agent 工作区中：
 
 ```bash
-# 假设您的 Agent 工作区在 ~/.config/ai-agent/skills
-cp -r skills/* ~/.config/ai-agent/skills/
+# Claude Code
+cp -r skills/* ~/.claude/skills/
+
+# Cursor
+cp -r skills/* ~/.cursor/skills/
 ```
 
 ## 📖 详细文档
@@ -58,8 +61,8 @@ cp -r skills/* ~/.config/ai-agent/skills/
 - [脚手架使用指南](./skills/react-docs-ui-scaffold/references/)
 
 更多文档：
-- [使用指南](./docs/USAGE.md)
-- [开发指南](./docs/DEVELOPMENT.md)
+- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)
+- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)
 
 ## 🤝 贡献
 
@@ -72,4 +75,4 @@ MIT License - 详见 [LICENSE](./LICENSE) 文件
 ## 🔗 相关链接
 
 - [react-docs-ui](https://github.com/shenjianZ/react-docs-ui)
-- [create-react-docs-ui](https://github.com/shenjianZ/react-docs-ui/tree/main/create-react-docs-ui)
+- [create-react-docs-ui](https://github.com/shenjianZ/create-react-docs-ui)

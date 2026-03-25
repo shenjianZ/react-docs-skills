@@ -29,8 +29,7 @@ cd react-docs-skills
 将技能目录添加到 Claude Code 的工作区：
 
 ```bash
-# 假设 Claude Code 的技能目录在 ~/.config/claude-code/skills
-cp -r skills/* ~/.config/claude-code/skills/
+cp -r skills/* ~/.claude/skills/
 ```
 
 ### Cursor
