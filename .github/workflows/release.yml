@@ -48,44 +48,39 @@ jobs:
     - name: Generate changelog
       id: changelog
       run: |
-        # 获取上一个标签
-        PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-        
-        # 创建临时文件
-        echo '## 🎉 首次发布' > /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '这是 React Docs UI Skills 的第一个正式版本！' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '## 📦 包含的 Skills' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '- **react-docs-ui-config** - 配置编写技能' >> /tmp/changelog.txt
-        echo '- **react-docs-ui-doc-authoring** - 文档编写技能' >> /tmp/changelog.txt
-        echo '- **react-docs-ui-scaffold** - 脚手架使用技能' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '## 🚀 快速开始' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '```bash' >> /tmp/changelog.txt
-        echo 'git clone https://github.com/shenjianZ/react-docs-skills.git' >> /tmp/changelog.txt
-        echo 'cd react-docs-skills' >> /tmp/changelog.txt
-        echo '```' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '## 📖 文档' >> /tmp/changelog.txt
-        echo '' >> /tmp/changelog.txt
-        echo '- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)' >> /tmp/changelog.txt
-        echo '- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)' >> /tmp/changelog.txt
-        echo '- [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)' >> /tmp/changelog.txt
-        
-        # 读取文件内容并处理换行
-        BODY=$(cat /tmp/changelog.txt | awk '{printf "%s\n", $0}' | sed 's/\\n$//')
-        echo "body=${BODY}" >> $GITHUB_OUTPUT
+        # 创建变更日志文件
+        cat > /tmp/changelog.md << 'EOF'
+## 🎉 首次发布
+
+这是 React Docs UI Skills 的第一个正式版本！
+
+## 📦 包含的 Skills
+
+- **react-docs-ui-config** - 配置编写技能
+- **react-docs-ui-doc-authoring** - 文档编写技能
+- **react-docs-ui-scaffold** - 脚手架使用技能
+
+## 🚀 快速开始
+
+\`\`\`bash
+git clone https://github.com/shenjianZ/react-docs-skills.git
+cd react-docs-skills
+\`\`\`
+
+## 📖 文档
+
+- [使用指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/USAGE.md)
+- [开发指南](https://github.com/shenjianZ/react-docs-skills/blob/master/docs/DEVELOPMENT.md)
+- [贡献指南](https://github.com/shenjianZ/react-docs-skills/blob/master/CONTRIBUTING.md)
+EOF
 
     - name: Create Release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.get_version.outputs.version }}
-        release_name: Release ${{ steps.get_version.outputs.version }}
-        body: ${{ steps.changelog.outputs.body }}
+        name: Release ${{ steps.get_version.outputs.version }}
+        body_path: /tmp/changelog.md
         draft: false
         prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
