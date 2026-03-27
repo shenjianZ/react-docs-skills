@@ -17,7 +17,7 @@
 ### 2. react-docs-ui-doc-authoring
 编写 Markdown、Frontmatter 和 MDX 文档
 
-- 使用 frontmatter 字段（title、description、author、date）
+- 使用 frontmatter 字段（title、description、author、createdAt、lastUpdated）
 - 使用自定义 MDX 组件
 - 维护中英文双语文档
 

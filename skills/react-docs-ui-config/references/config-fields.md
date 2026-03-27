@@ -9,6 +9,8 @@
 
 - `site`
 - `navbar`
+- `announcement`
+- `versions`
 - `sidebar`
 - `theme`
 - `toc`
@@ -19,9 +21,19 @@
 - `fonts`
 - `codeHighlight`
 - `search`
+- `seo`
 - `export`
+- `pageMeta`
+- `editLink`
+- `feedback`
 - `ai`
 - `pwa`
+
+补充提醒：
+
+- `site.url` 会影响 `canonical`、`hreflang`、`og:url`
+- `theme.defaultMode` 用来控制默认主题模式
+- `pageMeta.showAuthors` 会影响页面头部作者展示
 
 ## 高频说明
 
@@ -109,6 +121,18 @@ sidebar:
 
 - 导出能力统一由这里控制
 - `pdfServer` 只有在 `enabled: true` 时才应按启用状态说明
+
+### `seo`
+
+- 常见字段包括 `defaultTitle`、`titleTemplate`、`defaultDescription`
+- `defaultOgImage`、`robots`、`twitterCard` 也属于这里
+- 解释 SEO 时，记得一起提醒 `site.url`
+
+### `pageMeta` / `editLink` / `feedback`
+
+- `pageMeta` 控制最后更新时间、作者、编辑入口等页面元信息展示
+- `editLink.urlTemplate` 支持 `{lang}`、`{slug}`、`{docPath}`、`{ext}`、`{filePath}`
+- `feedback` 用于页面底部反馈提交与文案控制
 
 ### `fonts`
 

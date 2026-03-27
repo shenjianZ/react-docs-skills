@@ -31,7 +31,7 @@ description: Use this skill when the user asks how to write, organize, or mainta
 
 - 回答保持面向最终用户。
 - 建议要紧贴 docs 项目的目录结构和使用方式。
-- frontmatter 优先使用 `title`、`description`、`author`、`date` 这些字段。
+- frontmatter 优先使用 `title`、`description`、`author`、`createdAt`、`lastUpdated` 这些字段。
 - 如果 frontmatter 里已经写了 `title`，要提醒用户避免在正文里重复展示同一个标题。
 - 默认优先产出中文 Markdown 或 MDX 文档；只有在中文内容审核没有问题后，再继续产出英文版本。英文文档应基于已确认的中文文档做等价翻译，不要先独立编写英文稿。
 - 不要承诺"只建文件就会自动进入侧边栏"。

@@ -9,13 +9,15 @@
 - `title`
 - `description`
 - `author`
-- `date`
+- `createdAt`
+- `lastUpdated`
 
 当页面需要结构化的头部信息时，优先使用 frontmatter。
 
 编写建议：
 
 - 如果这些字段存在，页面头部信息应主要由 frontmatter 提供
+- `createdAt` 用于创建时间，`lastUpdated` 用于页面更新时间
 - 如果 frontmatter 里已经有 `title`，正文里通常不要再重复写同样的主标题，除非页面确实需要
 
 ## MDX
