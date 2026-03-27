@@ -16,7 +16,17 @@
 - `public/docs/zh-cn/index.md` -> 中文首页
 - `public/docs/zh-cn/docs/guide/installation.md` -> `/docs/guide/installation`
 - `public/docs/en/docs/test/mdx-test.mdx` -> `/docs/test/mdx-test`
+- `public/docs/zh-cn/changelog/v0.6.20.md` -> `/changelog/v0.6.20`
+- `public/docs/en/changelog/v0.6.20.md` -> `/changelog/v0.6.20`
+
+## Changelog 路径约定
+
+- 发布记录默认放在 `public/docs/<lang>/changelog/`
+- 文件名就是最终详情页路由里的 slug
+- changelog 列表页通常是 `/:lang/changelog`
+- changelog 详情页通常是 `/:lang/changelog/:slug`
 
 ## 重要提醒
 
 只创建文档文件，并不会自动让页面出现在 navbar 或 sidebar 中。导航显示仍然要靠配置文件。
+如果项目使用 changelog 索引文件驱动列表页，在新增、重命名或删除发布文件后，还要重新生成索引。

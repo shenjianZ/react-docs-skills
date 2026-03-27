@@ -20,6 +20,24 @@
 - `createdAt` 用于创建时间，`lastUpdated` 用于页面更新时间
 - 如果 frontmatter 里已经有 `title`，正文里通常不要再重复写同样的主标题，除非页面确实需要
 
+## Changelog Frontmatter
+
+编写 changelog 或 release notes 时，优先补齐这些字段：
+
+- `title`
+- `summary`
+- `date`
+- `version`
+- `type`
+- `draft`
+- `breaking`
+
+补充约定：
+
+- `type` 只使用项目支持的枚举值
+- `draft: true` 通常表示隐藏列表项
+- 先写 frontmatter，再补正文中的发布说明内容
+
 ## MDX
 
 推荐约定：

@@ -15,11 +15,12 @@
 - 维护中英文配置同步
 
 ### 2. react-docs-ui-doc-authoring
-编写 Markdown、Frontmatter 和 MDX 文档
+编写 Markdown、Frontmatter、MDX 文档，以及 changelog / release notes
 
 - 使用 frontmatter 字段（title、description、author、createdAt、lastUpdated）
 - 使用自定义 MDX 组件
 - 维护中英文双语文档
+- 新增或维护 `public/docs/<lang>/changelog/*.md`
 
 ### 3. react-docs-ui-scaffold
 创建和引导使用 create-react-docs-ui 文档站点

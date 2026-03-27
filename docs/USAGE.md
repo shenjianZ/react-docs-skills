@@ -57,11 +57,16 @@ Agent: [使用 react-docs-ui-config 技能]
 
 ### react-docs-ui-doc-authoring
 
-用于编写 react-docs-ui 的文档。
+用于编写 react-docs-ui 的文档，以及 changelog / release notes。
 
 **示例对话：**
 ```
 你: 帮我写一个关于安装的文档页面
+Agent: [使用 react-docs-ui-doc-authoring 技能]
+```
+
+```text
+你: 帮我新增一条 v0.2.0 的 changelog，中英文各一份
 Agent: [使用 react-docs-ui-doc-authoring 技能]
 ```
 
